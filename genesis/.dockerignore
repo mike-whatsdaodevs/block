@@ -1,0 +1,10 @@
+.*ignore
+.git
+.gitattributes
+*.md
+coverage
+build
+node_modules
+devnet.json
+localnet.json
+Dockerfile

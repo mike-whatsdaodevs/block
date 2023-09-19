@@ -1,0 +1,177 @@
+version: "3.5"
+services:
+
+  bootnode:
+    image: ankrnetwork/bas-template-bsc:devel
+    container_name: bootnode
+    command:
+      - "geth"
+      - "--datadir=/datadir"
+      - "--genesis=/datadir/genesis.json"
+      - "--networkid=$CHAIN_ID"
+      - "--nodekeyhex=633ab917d09441de38ae9251e79ced41df39a1c338842b826c18fb1773246e18"
+      - "--nat=extip:$HOST_IP"
+      - "--syncmode=full"
+    volumes:
+      - "./genesis.json:/datadir/genesis.json"
+      - "./datadir/bootnode:/datadir/geth"
+    network_mode: "host"
+    ports:
+      - "30303:30303"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    restart: always
+
+  validator_1:
+    image: ankrnetwork/bas-template-bsc:devel
+    container_name: validator_1
+    command:
+      - "geth"
+      - "--datadir=/datadir"
+      - "--genesis=/datadir/genesis.json"
+      - "--mine"
+      - "--password=/datadir/password.txt"
+      - "--unlock=0x08fae3885e299c24ff9841478eb946f41023ac69"
+      - "--miner.etherbase=0x08fae3885e299c24ff9841478eb946f41023ac69"
+      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--gcmode=archive"
+      - "--syncmode=full"
+      - "--networkid=66666"
+      - "--nat=extip:$HOST_IP"
+      - "--port=30304"
+    volumes:
+      - "./genesis.json:/datadir/genesis.json"
+      - "./genesis/keystore:/datadir/keystore"
+      - "./genesis/password.txt:/datadir/password.txt"
+      - "./datadir/validator_1:/datadir/geth"
+    ports:
+      - "30304:30304"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    restart: always
+  validator_2:
+    image: ankrnetwork/bas-template-bsc:devel
+    container_name: validator_2
+    command:
+      - "geth"
+      - "--datadir=/datadir"
+      - "--genesis=/datadir/genesis.json"
+      - "--mine"
+      - "--password=/datadir/password.txt"
+      - "--unlock=0x751aaca849b09a3e347bbfe125cf18423cc24b40"
+      - "--miner.etherbase=0x751aaca849b09a3e347bbfe125cf18423cc24b40"
+      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--gcmode=archive"
+      - "--syncmode=full"
+      - "--networkid=66666"
+      - "--nat=extip:$HOST_IP"
+      - "--port=30305"
+    volumes:
+      - "./genesis.json:/datadir/genesis.json"
+      - "./genesis/keystore:/datadir/keystore"
+      - "./genesis/password.txt:/datadir/password.txt"
+      - "./datadir/validator_2:/datadir/geth"
+    ports:
+      - "30305:30305"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    restart: always
+  validator_3:
+    image: ankrnetwork/bas-template-bsc:devel
+    container_name: validator_3
+    command:
+      - "geth"
+      - "--datadir=/datadir"
+      - "--genesis=/datadir/genesis.json"
+      - "--mine"
+      - "--password=/datadir/password.txt"
+      - "--unlock=0xa6ff33e3250cc765052ac9d7f7dfebda183c4b9b"
+      - "--miner.etherbase=0xa6ff33e3250cc765052ac9d7f7dfebda183c4b9b"
+      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--gcmode=archive"
+      - "--syncmode=full"
+      - "--networkid=66666"
+      - "--nat=extip:$HOST_IP"
+      - "--port=30306"
+    volumes:
+      - "./genesis.json:/datadir/genesis.json"
+      - "./genesis/keystore:/datadir/keystore"
+      - "./genesis/password.txt:/datadir/password.txt"
+      - "./datadir/validator_3:/datadir/geth"
+    ports:
+      - "30306:30306"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    restart: always
+
+  rpc:
+    image: ankrnetwork/bas-template-bsc:devel
+    container_name: rpc
+    command:
+      - "geth"
+      - "--datadir=/datadir"
+      - "--genesis=/datadir/genesis.json"
+      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--networkid=66666"
+      - "--port=30307"
+      - "--gcmode=archive"
+      - "--syncmode=full"
+      - "--http"
+      - "--http.addr=0.0.0.0"
+      - "--http.api=eth,net,web3,debug,trace,txpool"
+      - "--http.port=8545"
+      - "--http.corsdomain=*"
+      - "--http.vhosts=*"
+      - "--ws"
+      - "--ws.addr=0.0.0.0"
+      - "--ws.api=eth,net,web3,debug,trace,txpool"
+      - "--ws.port=8546"
+      - "--ws.origins=*"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - "8545:8545"
+      - "8546:8546"
+    volumes:
+      - "./genesis.json:/datadir/genesis.json"
+      - "./genesis/keystore:/datadir/keystore"
+      - "./genesis/password.txt:/datadir/password.txt"
+      - "./datadir/rpc:/datadir/geth"
+    restart: always
+
+  staking-ui:
+    container_name: 'staking'
+    image: ankrnetwork/bas-staking-ui:devel
+    environment:
+      REACT_APP_ENVIRONMENT: "production"
+      CHAIN_ID: "${CHAIN_ID}"
+      CHAIN_NAME: "BTCC"
+      CHAIN_RPC: "https://rpc.${DOMAIN_NAME}"
+      EXPLORER_HOME_URL: "https://scan.${DOMAIN_NAME}/"
+      EXPLORER_TX_URL: "https://scan.${DOMAIN_NAME}/tx/{tx}"
+      EXPLORER_ADDRESS_URL: "https://scan.${DOMAIN_NAME}/address/{address}"
+      EXPLORER_BLOCK_URL: "https://scan.${DOMAIN_NAME}/block/{block}"
+      # new env
+      REACT_APP_API_ENDPOINT: "https://rpc.${DOMAIN_NAME}"
+      REACT_APP_DEFAULT_NETWORK: "BTC20"
+      REACT_APP_CHAIN_ID: "${CHAIN_ID}"
+      REACT_APP_EXPLORER_URL: "https://scan.${DOMAIN_NAME}/"
+      REACT_APP_CHAIN_NAME: "BTCC #${CHAIN_ID}"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - "3001:80"
+    restart: always
+
+  nginx:
+    build: "./nginx"
+    environment:
+      DOMAIN_NAME: "${DOMAIN_NAME}"
+    volumes:
+      - ~/.acme.sh/:/root/.acme.sh/
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Install.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E5%AE%89%E8%A3%85docker">安装Docker</h1>
+<p>在chain目录下</p>
+<pre class="hljs"><code><div>$ make install-docker
+</div></code></pre>
+<h1 id="%E8%8E%B7%E5%8F%96ssl%E8%AF%81%E4%B9%A6">获取SSL证书</h1>
+<p>在chain目录下</p>
+<pre class="hljs"><code><div>$ make install-acme
+</div></code></pre>
+<h1 id="%E5%88%9B%E5%BB%BA%E7%BD%91%E7%BB%9C">创建网络</h1>
+<h2 id="%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7">下载工具</h2>
+<pre class="hljs"><code><div>$ docker pull ethereum/client:alltools-latest
+</div></code></pre>
+<h2 id="%E7%94%9F%E6%88%90nodekey">生成nodekey</h2>
+<pre class="hljs"><code><div>$ docker run -it --rm ethereum/client-go:alltools-latest sh -c <span class="hljs-string">"bootnode -genkey tmp.key &amp;&amp; cat tmp.key &amp;&amp; echo"</span>
+</div></code></pre>
+<p>会有想这样一串的密匙，<code>e5793dc60d802a0f40d4106fc4e74d197452a152de8c09a0942bd847115b1300</code>，以下称为nodekey</p>
+<h2 id="%E7%94%9F%E6%88%90validator%E5%AF%86%E5%8C%99">生成Validator密匙</h2>
+<pre class="hljs"><code><div>$ docker run -it --rm -v ./keystores/validator-1:/datadir ethereum/client-go:alltools-latest sh -c <span class="hljs-string">"geth --datadir /datadir account new"</span>
+</div></code></pre>
+<p>会被提示输入密码，以下是输出示例</p>
+<pre class="hljs"><code><div>INFO [09-18|15:39:26.249] Maximum peer count                       ETH=50 LES=0 total=50
+INFO [09-18|15:39:26.252] Smartcard socket not found, disabling    err=<span class="hljs-string">"stat /run/pcscd/pcscd.comm: no such file or directory"</span>
+Your new account is locked with a password. Please give a password. Do not forget this password.
+Password: 
+Repeat password: 
+
+Your new key was generated
+
+Public address of the key:   0x90d2E318B8CB7134a027CBFBbF242850629989A0
+Path of the secret key file: /datadir/keystore/UTC--2023-09-18T15-39-38.966659960Z--90d2e318b8cb7134a027cbfbbf242850629989a0
+
+- You can share your public address with anyone. Others need it to interact with you.
+- You must NEVER share the secret key with anyone! The key controls access to your funds!
+- You must BACKUP your key file! Without the key, it<span class="hljs-string">'s impossible to access account funds!
+- You must REMEMBER your password! Without the password, it'</span>s impossible to decrypt the key!
+</div></code></pre>
+<p>为每一个validator重复这个步骤，至少三个，五个最好</p>
+<h2 id="%E7%94%9F%E6%88%90genesisjson">生成<code>genesis.json</code></h2>
+<p>修改chain目录下的<code>config.json</code></p>
+<p>把刚才生成的validator的地址填入，<code>validators</code>和<code>initialStakes</code>下，<code>&quot;0x3635c9adc5dea00000&quot;</code>是1000，把你的主账户的地址放在<code>faucet</code>下， <code>&quot;0x115EEC47F6CF7E35000000&quot;</code>是21,000,000</p>
+<p>删除chain目录下的<code>genesis.json</code>，在chain目录下</p>
+<pre class="hljs"><code><div>$ make create-genesis
+</div></code></pre>
+<p>请保存好生成的<code>genesis.json</code></p>
+<h2 id="%E4%BF%AE%E6%94%B9nodekey">修改nodekey</h2>
+<p>在chain目录下的<code>docker-compose.yaml</code>, 改<code>bootnode</code>下nodekey为刚才生成的</p>
+<pre class="hljs"><code><div>      <span class="hljs-bullet">-</span> <span class="hljs-string">"--nodekeyhex=633ab917d09441de38ae9251e79ced41df39a1c338842b826c18fb1773246e18"</span>
+</div></code></pre>
+<h2 id="%E8%AE%BE%E7%BD%AEenv">设置env</h2>
+<pre class="hljs"><code><div>$ <span class="hljs-built_in">export</span> DOMAIN_NAME=bitcoincode.technology
+$ <span class="hljs-built_in">export</span> CHAIN_ID=66666
+$ <span class="hljs-built_in">export</span> HOST_IP=`curl http://checkip.amazonaws.com`
+</div></code></pre>
+<h2 id="%E8%BF%90%E8%A1%8Cbootnode">运行bootnode</h2>
+<p>在chain目录下</p>
+<pre class="hljs"><code><div>$ make start-bootnode
+</div></code></pre>
+<h2 id="%E8%8E%B7%E5%8F%96bootnode%E7%9A%84enode%E5%9C%B0%E5%9D%80">获取bootnode的enode地址</h2>
+<pre class="hljs"><code><div>$ docker <span class="hljs-built_in">exec</span> -it bootnode sh -c <span class="hljs-string">"geth attach --exec admin.nodeInfo.enode /datadir/geth.ipc"</span>
+</div></code></pre>
+<p>以下是输出示例</p>
+<pre class="hljs"><code><div><span class="hljs-string">"enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@44.211.79.220:30303"</span>
+</div></code></pre>
+<h2 id="%E4%BF%AE%E6%94%B9validator">修改validator</h2>
+<p>在chain目录下的<code>docker-compose.yaml</code></p>
+<p>改<code>validator_1</code>下</p>
+<pre class="hljs"><code><div>      <span class="hljs-bullet">-</span> <span class="hljs-string">"--unlock=0x08fae3885e299c24ff9841478eb946f41023ac69"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"--miner.etherbase=0x08fae3885e299c24ff9841478eb946f41023ac69"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"</span>
+</div></code></pre>
+<p><code>--unlock</code>和<code>--miner.etherbase</code>是validator的地址</p>
+<p><code>--bootnodes</code>是刚刚的查找到的enode地址</p>
+<pre class="hljs"><code><div>    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./genesis.json:/datadir/genesis.json"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./genesis/keystore:/datadir/keystore"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./genesis/password.txt:/datadir/password.txt"</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">"./datadir/validator_1:/datadir/geth"</span>
+</div></code></pre>
+<p><code>./genesis/keystore</code>替换成刚才生成<code>./keystores/validator-1/keystore</code></p>
+<p><code>./genesis/password.txt</code>替换保存刚才设置密码的文本文件，内容示例</p>
+<pre class="hljs"><code><div>PASSWORD
+</div></code></pre>
+<p><code>./datadir/validator_1</code>替换成指向validator-1的数据文件</p>
+<p>按照这个改完所有validator</p>
+<h2 id="%E8%BF%90%E8%A1%8C%E9%93%BE">运行链</h2>
+<p>在chain目录下</p>
+<pre class="hljs"><code><div>$ make start
+</div></code></pre>
+<h1 id="blockscout">Blockscout</h1>
+<h2 id="%E8%BF%90%E8%A1%8Cblockscout">运行blockscout</h2>
+<p>在blockscout/docker-compose目录下</p>
+<pre class="hljs"><code><div>$  docker compose up --detach --build
+</div></code></pre>
+
+</body>
+</html>
