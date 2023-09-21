@@ -9,7 +9,7 @@ services:
       - "--datadir=/datadir"
       - "--genesis=/datadir/genesis.json"
       - "--networkid=$CHAIN_ID"
-      - "--nodekeyhex=633ab917d09441de38ae9251e79ced41df39a1c338842b826c18fb1773246e18"
+      - "--nodekeyhex=a08c0d8bf5042b7435dd9c0c993cf64c131047494926c2725c72221be165294e"
       - "--nat=extip:$HOST_IP"
       - "--syncmode=full"
     volumes:
@@ -31,17 +31,17 @@ services:
       - "--genesis=/datadir/genesis.json"
       - "--mine"
       - "--password=/datadir/password.txt"
-      - "--unlock=0x08fae3885e299c24ff9841478eb946f41023ac69"
-      - "--miner.etherbase=0x08fae3885e299c24ff9841478eb946f41023ac69"
-      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--unlock=0x389C759F5A432ec01DCd7806a210d00Fa022F129"
+      - "--miner.etherbase=0x389C759F5A432ec01DCd7806a210d00Fa022F129"
+      - "--bootnodes=enode://17bf6bc7a031020fc9d2c29336ff6c4c486e0f231f2b7bf8b713f5217c0adc1f7fa538b2c80c2a607e3de577d2f7db0b371b989e75b6f1ff6e236a066a2d8083@44.211.233.215:30303"
       - "--gcmode=archive"
       - "--syncmode=full"
-      - "--networkid=66666"
+      - "--networkid=$CHAIN_ID"
       - "--nat=extip:$HOST_IP"
       - "--port=30304"
     volumes:
       - "./genesis.json:/datadir/genesis.json"
-      - "./genesis/keystore:/datadir/keystore"
+      - "./keystores/validator_1/keystore:/datadir/keystore"
       - "./genesis/password.txt:/datadir/password.txt"
       - "./datadir/validator_1:/datadir/geth"
     ports:
@@ -58,17 +58,17 @@ services:
       - "--genesis=/datadir/genesis.json"
       - "--mine"
       - "--password=/datadir/password.txt"
-      - "--unlock=0x751aaca849b09a3e347bbfe125cf18423cc24b40"
-      - "--miner.etherbase=0x751aaca849b09a3e347bbfe125cf18423cc24b40"
-      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--unlock=0xD036B2E4E4a0fE043F7abC564A84AA9E0d3b25f6"
+      - "--miner.etherbase=0xD036B2E4E4a0fE043F7abC564A84AA9E0d3b25f6"
+      - "--bootnodes=enode://17bf6bc7a031020fc9d2c29336ff6c4c486e0f231f2b7bf8b713f5217c0adc1f7fa538b2c80c2a607e3de577d2f7db0b371b989e75b6f1ff6e236a066a2d8083@44.211.233.215:30303"
       - "--gcmode=archive"
       - "--syncmode=full"
-      - "--networkid=66666"
+      - "--networkid=$CHAIN_ID"
       - "--nat=extip:$HOST_IP"
       - "--port=30305"
     volumes:
       - "./genesis.json:/datadir/genesis.json"
-      - "./genesis/keystore:/datadir/keystore"
+      - "./keystores/validator_2/keystore:/datadir/keystore"
       - "./genesis/password.txt:/datadir/password.txt"
       - "./datadir/validator_2:/datadir/geth"
     ports:
@@ -85,17 +85,17 @@ services:
       - "--genesis=/datadir/genesis.json"
       - "--mine"
       - "--password=/datadir/password.txt"
-      - "--unlock=0xa6ff33e3250cc765052ac9d7f7dfebda183c4b9b"
-      - "--miner.etherbase=0xa6ff33e3250cc765052ac9d7f7dfebda183c4b9b"
-      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
+      - "--unlock=0x9d37cBfb0A2ffF9d863C6dEB024772431E110c6A"
+      - "--miner.etherbase=0x9d37cBfb0A2ffF9d863C6dEB024772431E110c6A"
+      - "--bootnodes=enode://17bf6bc7a031020fc9d2c29336ff6c4c486e0f231f2b7bf8b713f5217c0adc1f7fa538b2c80c2a607e3de577d2f7db0b371b989e75b6f1ff6e236a066a2d8083@44.211.233.215:30303"
       - "--gcmode=archive"
       - "--syncmode=full"
-      - "--networkid=66666"
+      - "--networkid=$CHAIN_ID"
       - "--nat=extip:$HOST_IP"
       - "--port=30306"
     volumes:
       - "./genesis.json:/datadir/genesis.json"
-      - "./genesis/keystore:/datadir/keystore"
+      - "./keystores/validator_3/keystore:/datadir/keystore"
       - "./genesis/password.txt:/datadir/password.txt"
       - "./datadir/validator_3:/datadir/geth"
     ports:
@@ -111,8 +111,8 @@ services:
       - "geth"
       - "--datadir=/datadir"
       - "--genesis=/datadir/genesis.json"
-      - "--bootnodes=enode://5c8e90050fabb7e14e4921dc107caf533140112245e7a231d0edc49861cd779760ad4804e7034952a5cc79422fa9d31c54e9a6141fb4995af7a6bfce7a39140f@bootnode.bitcoincode.technology:30303"
-      - "--networkid=66666"
+      - "--bootnodes=enode://17bf6bc7a031020fc9d2c29336ff6c4c486e0f231f2b7bf8b713f5217c0adc1f7fa538b2c80c2a607e3de577d2f7db0b371b989e75b6f1ff6e236a066a2d8083@44.211.233.215:30303"
+      - "--networkid=$CHAIN_ID"
       - "--port=30307"
       - "--gcmode=archive"
       - "--syncmode=full"
@@ -134,8 +134,6 @@ services:
       - "8546:8546"
     volumes:
       - "./genesis.json:/datadir/genesis.json"
-      - "./genesis/keystore:/datadir/keystore"
-      - "./genesis/password.txt:/datadir/password.txt"
       - "./datadir/rpc:/datadir/geth"
     restart: always
 
@@ -145,7 +143,7 @@ services:
     environment:
       REACT_APP_ENVIRONMENT: "production"
       CHAIN_ID: "${CHAIN_ID}"
-      CHAIN_NAME: "BTCC"
+      CHAIN_NAME: "${CHAIN_NAME}"
       CHAIN_RPC: "https://rpc.${DOMAIN_NAME}"
       EXPLORER_HOME_URL: "https://scan.${DOMAIN_NAME}/"
       EXPLORER_TX_URL: "https://scan.${DOMAIN_NAME}/tx/{tx}"
@@ -153,10 +151,10 @@ services:
       EXPLORER_BLOCK_URL: "https://scan.${DOMAIN_NAME}/block/{block}"
       # new env
       REACT_APP_API_ENDPOINT: "https://rpc.${DOMAIN_NAME}"
-      REACT_APP_DEFAULT_NETWORK: "BTC20"
+      REACT_APP_DEFAULT_NETWORK: "${CHAIN_NAME}"
       REACT_APP_CHAIN_ID: "${CHAIN_ID}"
       REACT_APP_EXPLORER_URL: "https://scan.${DOMAIN_NAME}/"
-      REACT_APP_CHAIN_NAME: "BTCC #${CHAIN_ID}"
+      REACT_APP_CHAIN_NAME: "${CHAIN_NAME} #${CHAIN_ID}"
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
@@ -165,6 +163,7 @@ services:
 
   nginx:
     build: "./nginx"
+    container_name: "nginx"
     environment:
       DOMAIN_NAME: "${DOMAIN_NAME}"
     volumes:
